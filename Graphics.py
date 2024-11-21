@@ -49,6 +49,7 @@ class Cell:
         self._y1 = None
         self._y2 = None
         self._win = win
+        self.visited = False
     
     def draw(self, top_left: Point, bottom_right: Point):
         if self._win is None:
