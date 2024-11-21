@@ -39,7 +39,7 @@ class Window:
         line.draw(self.canvas, fill_colour)
 
 class Cell:
-    def __init__(self, win: Window):
+    def __init__(self, win: Window = None):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
@@ -60,16 +60,28 @@ class Cell:
 
         if self.has_left_wall:
             l = Line(top_left, Point(top_left.x, bottom_right.y))
-            self._win.draw_line(l, "Black")
+            self._win.draw_line(l, "black")
+        else:
+            l = Line(top_left, Point(top_left.x, bottom_right.y))
+            self._win.draw_line(l, "#F0F0F0")
         if self.has_top_wall:
             l = Line(top_left, Point(bottom_right.x, top_left.y))
-            self._win.draw_line(l, "Black")
+            self._win.draw_line(l, "black")
+        else:
+            l = Line(top_left, Point(bottom_right.x, top_left.y))
+            self._win.draw_line(l, "#F0F0F0")
         if self.has_right_wall:
             l = Line(Point(bottom_right.x, top_left.y), bottom_right)
-            self._win.draw_line(l, "Black")
+            self._win.draw_line(l, "black")
+        else:
+            l = Line(Point(bottom_right.x, top_left.y), bottom_right)
+            self._win.draw_line(l, "#F0F0F0")
         if self.has_bottom_wall:
             l = Line(Point(top_left.x, bottom_right.y), bottom_right)
-            self._win.draw_line(l, "Black")
+            self._win.draw_line(l, "black")
+        else:
+            l = Line(Point(top_left.x, bottom_right.y), bottom_right)
+            self._win.draw_line(l, "#F0F0F0")
     
     def draw_move(self, to_cell, undo=False):
         colour = "gray" if undo else "red"
