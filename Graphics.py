@@ -86,3 +86,21 @@ class Cell:
     
     def draw_move(self, to_cell, undo=False):
         colour = "gray" if undo else "red"
+
+        middleSelf = self.middle(
+            Point(self._x1, self._y1), 
+            Point(self._x2, self._y2))
+        middleTo = self.middle(
+            Point(to_cell._x1, to_cell._y1), 
+            Point(to_cell._x2, to_cell._y2))
+        
+        l = Line(middleSelf, middleTo)
+        
+        self._win.draw_line(l, colour)
+
+
+    def middle(self, p1: Point, p2: Point):
+        x = abs(p1.x + p2.x) // 2
+        y = abs(p1.y + p2.y) // 2
+
+        return Point(x, y)
