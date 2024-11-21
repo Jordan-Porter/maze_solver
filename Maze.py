@@ -1,10 +1,8 @@
-from Window import Window
-from Cell import Cell
-from Point import Point
+from Graphics import Window, Cell, Point
 import time
 
 class Maze:
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win: Window):
         self._x1 = x1
         self._y1 = y1
         self._num_rows = num_rows

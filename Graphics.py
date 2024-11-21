@@ -1,6 +1,42 @@
-from Window import Window
-from Line import Line
-from Point import Point
+from tkinter import Tk, BOTH, Canvas
+
+class Point:
+    def __init__(self, x = 0, y = 0):
+        self.x = x
+        self.y = y
+
+class Line:
+    def __init__(self, p1: Point, p2: Point):
+        self.p1 = p1
+        self.p2 = p2
+    
+    def draw(self, canvas: Canvas, fill_colour: str):
+        canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_colour, width=2)
+
+class Window:
+    def __init__(self, width, height):
+        self.__root = Tk()
+        self.__root.title("Maze Solver")
+        self.canvas = Canvas(height=height, width=width)
+        self.canvas.pack()
+        self.running = False
+        self.__root.protocol("WM_DELETE_WINDOW", self.close)
+    
+    def redraw(self):
+        self.__root.update_idletasks()
+        self.__root.update()
+    
+    def wait_for_close(self):
+        self.running = True
+
+        while self.running == True:
+            self.redraw()
+    
+    def close(self):
+        self.running = False
+    
+    def draw_line(self, line: Line, fill_colour: str):
+        line.draw(self.canvas, fill_colour)
 
 class Cell:
     def __init__(self, win: Window):
@@ -37,21 +73,3 @@ class Cell:
     
     def draw_move(self, to_cell, undo=False):
         colour = "gray" if undo else "red"
-        
-        middleSelf = self.middle(
-            Point(self._x1, self._y1), 
-            Point(self._x2, self._y2))
-        middleTo = self.middle(
-            Point(to_cell._x1, to_cell._y1), 
-            Point(to_cell._x2, to_cell._y2))
-        
-        l = Line(middleSelf, middleTo)
-        
-        self._win.draw_line(l, colour)
-
-
-    def middle(self, p1: Point, p2: Point):
-        x = abs(p1.x + p2.x) // 2
-        y = abs(p1.y + p2.y) // 2
-
-        return Point(x, y)
