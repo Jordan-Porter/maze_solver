@@ -20,10 +20,6 @@ class Maze:
         self._reset_cells_visited()
     
     def _create_cells(self):
-        # col = [Cell() for i in range(self.num_rows)]
-        # cells = [col for i in range(self.num_cols)]
-        # self._cells = cells
-        # self._draw_cell(self,)
         for i in range(self._num_cols):
             col_cells = []
             for j in range(self._num_rows):
@@ -122,7 +118,6 @@ class Maze:
         if (
             i > 0 
             and self._cells[i][j].has_left_wall == False 
-            #and self._cells[i - 1][j].has_right_wall == False 
             and self._cells[i - 1][j].visited == False
         ):
             self._cells[i][j].draw_move(self._cells[i - 1][j])
@@ -135,7 +130,6 @@ class Maze:
         if (
             j > 0 
             and self._cells[i][j].has_top_wall == False 
-            #and self._cells[i][j - 1].has_bottom_wall == False 
             and self._cells[i][j - 1].visited == False
         ):
             self._cells[i][j].draw_move(self._cells[i][j - 1])
@@ -148,7 +142,6 @@ class Maze:
         if (
             i < self._num_cols - 1 
             and self._cells[i][j].has_right_wall == False 
-            #and self._cells[i + 1][j].has_left_wall == False 
             and self._cells[i + 1][j].visited == False
         ):
             self._cells[i][j].draw_move(self._cells[i + 1][j])
@@ -161,7 +154,6 @@ class Maze:
         if (
             j < self._num_rows - 1 
             and self._cells[i][j].has_bottom_wall == False 
-            #and self._cells[i][j + 1].has_top_wall == False 
             and self._cells[i][j + 1].visited == False
         ):
             self._cells[i][j].draw_move(self._cells[i][j + 1])
